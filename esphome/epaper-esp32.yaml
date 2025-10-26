@@ -190,6 +190,14 @@ sensor:
     entity_id: sensor.weather_templow_5
     id: weather_templow_5
 
+    # Conso electrique
+  - platform: homeassistant
+    entity_id: sensor.kwh_grid
+    id: kWh_grid
+  - platform: homeassistant
+    entity_id: sensor.kwh_solar
+    id: kWh_solar
+
 text_sensor: 
   - platform: homeassistant
     entity_id: sensor.date_fr_complete
@@ -383,11 +391,11 @@ display:
 
 
      it.print(70, 540, id(mdi36), TextAlign::TOP_CENTER, "\U000F1A74");
-     it.print(95, 535, id(bold30), TextAlign::TOP_LEFT, "-.-kWh");
+     it.printf(95, 535, id(bold30), TextAlign::TOP_LEFT, "%.1f kWh", id(kWh_grid).state);
      it.print(95, 565, id(bold15), TextAlign::TOP_LEFT, "--% consommé");
      it.filled_rectangle(235, 535, 2, 40);
      it.print(265, 535, id(mdi36), TextAlign::TOP_CENTER, "\U000F1904");
-     it.print(285, 535, id(bold30), TextAlign::TOP_LEFT, "-.-kWh");
+     it.printf(285, 535, id(bold30), TextAlign::TOP_LEFT, "%.1f kWh", id(kWh_solar).state);
      it.print(285, 565, id(bold15), TextAlign::TOP_LEFT, "--% solaire");
      it.graph(50, 595, id(weather_temperature_graph));
 
