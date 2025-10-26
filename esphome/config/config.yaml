@@ -1,0 +1,58 @@
+
+sensor:
+  - platform: rest
+    name: "Open Meteo Prévisions 5J"
+    resource: >-
+      https://api.open-meteo.com/v1/forecast?
+      latitude=**&longitude=**
+      &daily=temperature_2m_min,temperature_2m_max
+      &forecast_days=5
+      &timezone=auto
+    json_attributes:
+      - daily
+    value_template: "{{ state_attr('sensor.open_meteo_previsions_5j', 'daily')['temperature_2m_min'][0] }}"
+    scan_interval: 10800  # toutes les 3 heures
+
+
+template:
+  - sensor:
+      - name: "Température min J+0"
+        unit_of_measurement: "°C"
+        state: >
+          {{ state_attr('sensor.open_meteo_previsions_5j', 'daily')['temperature_2m_min'][0] }}
+      - name: "Température max J+0"
+        unit_of_measurement: "°C"
+        state: >
+          {{ state_attr('sensor.open_meteo_previsions_5j', 'daily')['temperature_2m_max'][0] }}
+      - name: "Température min J+1"
+        unit_of_measurement: "°C"
+        state: >
+          {{ state_attr('sensor.open_meteo_previsions_5j', 'daily')['temperature_2m_min'][1] }}
+      - name: "Température max J+1"
+        unit_of_measurement: "°C"
+        state: >
+          {{ state_attr('sensor.open_meteo_previsions_5j', 'daily')['temperature_2m_max'][1] }}
+      - name: "Température min J+2"
+        unit_of_measurement: "°C"
+        state: >
+          {{ state_attr('sensor.open_meteo_previsions_5j', 'daily')['temperature_2m_min'][2] }}
+      - name: "Température max J+2"
+        unit_of_measurement: "°C"
+        state: >
+          {{ state_attr('sensor.open_meteo_previsions_5j', 'daily')['temperature_2m_max'][2] }}
+      - name: "Température min J+3"
+        unit_of_measurement: "°C"
+        state: >
+          {{ state_attr('sensor.open_meteo_previsions_5j', 'daily')['temperature_2m_min'][3] }}
+      - name: "Température max J+3"
+        unit_of_measurement: "°C"
+        state: >
+          {{ state_attr('sensor.open_meteo_previsions_5j', 'daily')['temperature_2m_max'][3] }}
+      - name: "Température min J+4"
+        unit_of_measurement: "°C"
+        state: >
+          {{ state_attr('sensor.open_meteo_previsions_5j', 'daily')['temperature_2m_min'][4] }}
+      - name: "Température max J+4"
+        unit_of_measurement: "°C"
+        state: >
+          {{ state_attr('sensor.open_meteo_previsions_5j', 'daily')['temperature_2m_max'][4] }}
