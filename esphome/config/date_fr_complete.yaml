@@ -1,0 +1,32 @@
+- name: "date_fr"
+      icon: mdi:calendar-today
+      state: >
+        {% set months = ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"] %}
+        {% set days = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]  %}
+        {{ days[now().weekday()] + ' ' + now().day | string + ' ' + months[now().month-1] }}
+    - name: "date_fr_complete"
+      icon: mdi:calendar-today
+      state: >
+        {% set months = ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"] %}
+        {% set days = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]  %}
+        {{ now().day | string + ' ' + months[now().month-1]  + ' ' + now().year | string }}
+    - name: "date_court"
+      icon: mdi:calendar-today
+      state: >
+        {% set days = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]  %}
+        {{ days[now().weekday()] + ' ' + now().day | string }}
+    - name: "date_court_fr"
+      icon: mdi:calendar-today
+      state: >
+        {% set months = ["Jan", "Fev", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Dec"] %}
+        {{ now().day | string + ' ' + months[now().month-1] }}
+    - name: "jours_fr"
+      icon: mdi:calendar-today
+      state: >
+        {{ ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"][now().weekday()] }}
+    - name: "date_jour_heure"
+      state: >
+        {{ states('sensor.date_fr') }} -- {{ now().strftime('%Hh%M') }}
+    - name: "heure_fr"
+      state: >
+        {{ now().strftime('%H:%M') }}
